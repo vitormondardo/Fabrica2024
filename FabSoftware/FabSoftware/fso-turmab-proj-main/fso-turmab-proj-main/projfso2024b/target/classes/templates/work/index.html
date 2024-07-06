@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+
+<head th:include="~{layout :: htmlhead}"></head>
+
+<body>
+  <nav th:replace="~{layout :: menu}">(menu)</nav>
+  <div class="central" style="display: flex; flex-direction: row; width: 100%; height: 100%;">
+    <div class="divizao1" style="width: 100%; margin-left: 2vh; margin-top: 2vh;">
+
+      <h1 style="font-family: 'Courier New';">Workers</h1>
+
+      
+
+      <table class="table" id="tabworkers">
+        <thead>
+          <th>Name</th>
+          <th>Role</th>
+          <th>Area</th>
+          <th></th>
+        </thead>
+        <tbody>
+          <tr th:each="umWork : ${listaWorks}">
+            <td th:text="${umWork.nome}"></td>
+            <td th:text="${umWork.funcao}"></td>
+            <td th:text="${umWork.area}"></td>
+            <td><a th:href="@{'/works/alterar/'+ ${umWork.id}}" class="btn btn-outline-dark" style="font-family: 'Courier New';">Alterar</a>
+
+              <button class="btn btn-outline-danger js-delete" style="font-family: 'Courier New';" th:data-id="${umWork.id}">Excluir</button>
+
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <div style="width: 100%; text-align: right;">
+        <a href="/works/novo" class="btn btn-dark" style="font-family: 'Courier New';">New</a>
+      </div>
+
+      <div class="modal" tabindex="-1" id="modalwork">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">Excluir Trabalhador?</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <p>Confirma a exclusão do trabalhador?</p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Não</button>
+              <button type="button" class="btn btn-primary" id="btnsimworker">Sim</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="divizao2" style="width: 100%; margin-left: 2vh; margin-top: 2vh;"> </div>
+  </div>
+
+
+
+
+  <div th:include="~{layout :: footer}">(footer)</div>
+  <script th:src="@{/script.js}"></script>
+</body>
+
+</html>

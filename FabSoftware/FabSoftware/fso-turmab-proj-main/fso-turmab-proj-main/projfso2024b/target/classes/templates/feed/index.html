@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head th:include="layout :: htmlhead"></head>
+<body>
+<nav th:replace="layout :: menu"></nav>
+<div class="central" style="margin: 2vh;">
+    <h1 style="font-family: 'Courier New';">Vincular Trabalhadores a Clientes</h1>
+    <div>
+        <div class="trabalhadores" id="trabalhadores">
+            <div th:each="work, stat : ${listaTrabalhos}" class="trabalhador-card">
+                <div class="trabalhador-header">
+                    <img src="https://imgur.com/VxWS5zN.jpg" class="trabalhador-imagem">
+                    <span class="trabalhador-nome" th:text="${work.nome}"></span>
+                </div>
+                <a>
+                    Lorem ipsum dolor sit amet,
+                    consectetur adipiscing elit,
+                    sed do eiusmod tempor incididunt ut
+                    labore et dolore magna aliqua.
+                    Ut enim ad minim veniam, 
+                    quis nostrud exercitation ullamco 
+                    laboris nisi ut aliquip ex ea commodo consequat.
+                </a>
+                <div class="botao-select">
+                    <select class="form-select" th:id="'clienteSelect' + ${stat.index}">
+                        <option value="">Selecione um cliente para vincular</option>
+                        <option th:each="cliente : ${listaClientes}" 
+                                th:value="@{|/feed/vincular/${cliente.id}/${work.id}|}" 
+                                th:text="${cliente.nome}">
+                        </option>
+                    </select>
+                    <button class="btn btn-outline-dark" th:id="'solicitarBtn' + ${stat.index}" onclick="solicitarVinculo(this.id)">Solicitar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div th:include="layout :: footer"></div>
+
+<style>
+    .trabalhador-header {
+        display: flex;
+        align-items: center;
+    }
+
+    .trabalhador-imagem {
+        width: 50px;
+        height: 50px;
+        margin-right: 10px;
+        border-radius: 50%;
+    }
+    .trabalhador-nome {
+        font-size: 2.5em;
+        font-family: 'Courier New';
+    }
+    .trabalhadores {
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: column;
+        align-items: center;
+        gap: 1vh;
+    }
+    .trabalhador-card {
+        border: 1px solid #ccc;
+        padding: 10px;
+        margin: 10px 0;
+        background-color: #f9f9f9;
+        border-radius: 5px;
+        gap: 3vh;
+        width: 75%;
+        display: flex;
+        flex-direction: column;
+    }
+    .botao-select {
+        display: flex;
+        align-items: center;
+        gap: 1vh;
+    }
+</style>
+
+<script>
+
+    function solicitarVinculo() {
+        var select = document.getElementById('clienteSelect');
+        var url = select.value;
+        if(url) {
+            window.location.href = url;
+        } else {
+            alert('Por favor, selecione um cliente para vincular.');
+        }
+    }
+
+    function atualizarTrabalhadores() {
+        fetch('/feed')
+            .then(response => response.text())
+            .then(html => {
+                document.getElementById('trabalhadores').innerHTML = html;
+            });
+    }
+    function solicitarVinculo(buttonId) {
+        console.log("Solicitação de vinculação enviada para o botão com ID:", buttonId);
+        var button = document.getElementById(buttonId);
+        var trabalhadorCard = button.closest('.trabalhador-card');
+        trabalhadorCard.remove();
+        alert("Solicitação enviada com sucesso!");
+    }
+</script>
+</body>
+</html>

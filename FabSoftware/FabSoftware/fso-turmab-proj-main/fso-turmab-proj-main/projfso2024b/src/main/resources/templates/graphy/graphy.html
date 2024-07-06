@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+
+<head th:include="layout :: htmlhead"></head>
+
+<body>
+    <nav th:replace="layout :: menu"></nav>
+    <div class="central" style="margin: 2vh;">
+        <h1 style="font-family: 'Courier New';">Graphy</h1>
+        <table class="table" id="tabgraphy">
+            <thead>
+                <tr>
+                    <th>Função</th>
+                    <th>Quantidade</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="graphy : ${graphyData}">
+                    <td th:text="${graphy.funcao}"></td>
+                    <td th:text="${graphy.count}"></td>
+                </tr>
+            </tbody>
+        </table>
+        <br>
+        <hr>
+        <br>
+        <center>
+            <div style="width: 50%; height: 50%;">
+                <canvas id="myChart"></canvas>
+            </div>
+        </center>
+        
+    </div>
+    <div th:include="layout :: footer"></div>
+    <script th:src="@{/script.js}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script th:inline="javascript">
+        
+        var graphyData = /*[[${graphyData}]]*/ [];
+
+        var labels = graphyData.map(function(item) {
+            return item.funcao;
+        });
+        var data = graphyData.map(function(item) {
+            return item.count;
+        });
+
+        var ctx = document.getElementById('myChart').getContext('2d');
+        var myChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: 'Quantidade por Função',
+                    data: data,
+                    backgroundColor: 'rgba(200, 200, 200, 0.2)',
+                    borderColor: 'rgba(0, 0, 0, 0.5)',
+                    borderDash: [5, 5],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+
+    <head th:include="layout :: htmlhead"></head>
+    <body>
+        
+        <nav th:replace="layout :: menu">(menu)</nav>
+
+        <h1 class="titulo">Welcome.</h1>
+
+        <div class="centro">
+
+          <a href="/clientes" class="card">
+            <h3>Clients</h3>
+            <img src="https://imgur.com/NJ68THU.png" >
+          </a>
+
+          <a href="/works" class="card">
+            <h3>Workers</h3>
+            <img src="https://imgur.com/iGUQRxO.png">
+          </a>
+
+          <a href="/graphy" class="card">
+            <h3>Graph</h3>
+            <img src="https://imgur.com/FfZBldr.png">
+          </a>
+
+          <a href="/feed" class="card">
+            <h3>Contract</h3>
+            <img src="https://imgur.com/SK2ERd0.png">
+          </a>
+
+        </div>
+        <div th:include="layout :: footer">(footer)</div>
+    </body>
+</html>
+
+
+<style>
+  .centro {
+    position: absolute;
+    top: 30%;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    gap: 5vh;
+    align-items: center;
+    justify-content: center;
+}
+
+.card img{
+    width: 13vh;
+    height: 13vh;
+    margin-top: 5vh;
+}
+
+.card{
+    width: 25vh;
+    height: 40vh;
+    background-color: #f1f1f1;
+    border-radius: 10px;
+    padding: 1em;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-decoration: none;
+    color: black;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+
+    cursor: pointer;
+}
+.card:hover {
+  transform: scale(1.02);
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+}
+
+.card h3{
+  margin-top: 1.6vh;
+  color: black;
+  font-size: 2.4em;
+  font-family: 'Courier New';
+}
+
+.titulo {
+    position: absolute;
+    top: 20%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    font-size: 5em;
+    font-family: 'Courier New';
+    margin-bottom: 0.5em;
+}
+</style>

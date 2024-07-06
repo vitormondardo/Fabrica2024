@@ -1,0 +1,16 @@
+br\univille\projfso2024b\controller\HomeController.class
+br\univille\projfso2024b\service\impl\ClienteServiceImpl.class
+br\univille\projfso2024b\repository\WorkRepository.class
+br\univille\projfso2024b\controller\GraphyController.class
+br\univille\projfso2024b\entity\Cliente.class
+br\univille\projfso2024b\service\ClienteService.class
+br\univille\projfso2024b\entity\Graphy.class
+br\univille\projfso2024b\service\impl\WorkServiceImpl.class
+br\univille\projfso2024b\controller\FeedController.class
+br\univille\projfso2024b\Startup.class
+br\univille\projfso2024b\controller\WorkController.class
+br\univille\projfso2024b\repository\ClienteRepository.class
+br\univille\projfso2024b\controller\ClienteController.class
+br\univille\projfso2024b\entity\Work.class
+br\univille\projfso2024b\service\WorkService.class
+br\univille\projfso2024b\Projfso2024bApplication.class
